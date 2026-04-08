@@ -2,51 +2,51 @@
 
 Introduce Data Model for Log Records as it is understood by OpenTelemetry.
 
-* [Motivation](#motivation)
-* [Design Notes](#design-notes)
-  * [Requirements](#requirements)
-  * [Field Kinds](#field-kinds)
-* [Log and Event Record Definition](#log-and-event-record-definition)
-  * [Field: `Timestamp`](#field-timestamp)
-  * [Trace Context Fields](#trace-context-fields)
-    * [Field: `TraceId`](#field-traceid)
-    * [Field: `SpanId`](#field-spanid)
-    * [Field: `TraceFlags`](#field-traceflags)
-  * [Severity Fields](#severity-fields)
-    * [Field: `SeverityText`](#field-severitytext)
-    * [Field: `SeverityNumber`](#field-severitynumber)
-    * [Mapping of `SeverityNumber`](#mapping-of-severitynumber)
-    * [Reverse Mapping](#reverse-mapping)
-    * [Error Semantics](#error-semantics)
-    * [Displaying Severity](#displaying-severity)
-    * [Comparing Severity](#comparing-severity)
-  * [Field: `Name`](#field-name)
-  * [Field: `Body`](#field-body)
-  * [Field: `Resource`](#field-resource)
-  * [Field: `Attributes`](#field-attributes)
-* [Example Log Records](#example-log-records)
-* [Questions Resolved during OTEP discussion](#questions-resolved-during-otep-discussion)
-  * [TraceFlags vs TraceParent and TraceState](#traceflags-vs-traceparent-and-tracestate)
-  * [Severity Fields](#severity-fields-1)
-  * [Timestamp Requirements](#timestamp-requirements)
-  * [Security Logs](#security-logs)
-* [Alternate Design](#alternate-design)
-* [Prior Art](#prior-art)
-  * [RFC5424 Syslog](#rfc5424-syslog)
-  * [Fluentd Forward Protocol Model](#fluentd-forward-protocol-model)
-* [Appendix A. Example Mappings](#appendix-a-example-mappings)
-  * [RFC5424 Syslog](#rfc5424-syslog-1)
-  * [Windows Event Log](#windows-event-log)
-  * [SignalFx Events](#signalfx-events)
-  * [Splunk HEC](#splunk-hec)
-  * [Log4j](#log4j)
-  * [Zap](#zap)
-  * [Apache HTTP Server access log](#apache-http-server-access-log)
-  * [CloudTrail Log Event](#cloudtrail-log-event)
-  * [Google Cloud Logging](#google-cloud-logging)
-* [Elastic Common Schema](#elastic-common-schema)
-* [Appendix B: `SeverityNumber` example mappings](#appendix-b-severitynumber-example-mappings)
-* [References](#references)
+- [Log Data Model](#log-data-model)
+  - [Motivation](#motivation)
+  - [Design Notes](#design-notes)
+    - [Requirements](#requirements)
+    - [Field Kinds](#field-kinds)
+  - [Log and Event Record Definition](#log-and-event-record-definition)
+    - [Field: `Timestamp`](#field-timestamp)
+    - [Trace Context Fields](#trace-context-fields)
+      - [Field: `TraceId`](#field-traceid)
+      - [Field: `SpanId`](#field-spanid)
+      - [Field: `TraceFlags`](#field-traceflags)
+    - [Severity Fields](#severity-fields)
+      - [Field: `SeverityText`](#field-severitytext)
+      - [Field: `SeverityNumber`](#field-severitynumber)
+      - [Mapping of `SeverityNumber`](#mapping-of-severitynumber)
+      - [Reverse Mapping](#reverse-mapping)
+      - [Error Semantics](#error-semantics)
+      - [Displaying Severity](#displaying-severity)
+      - [Comparing Severity](#comparing-severity)
+    - [Field: `Name`](#field-name)
+    - [Field: `Body`](#field-body)
+    - [Field: `Resource`](#field-resource)
+    - [Field: `Attributes`](#field-attributes)
+  - [Example Log Records](#example-log-records)
+  - [Questions Resolved during OTEP discussion](#questions-resolved-during-otep-discussion)
+    - [TraceFlags vs TraceParent and TraceState](#traceflags-vs-traceparent-and-tracestate)
+    - [Severity Fields](#severity-fields-1)
+    - [Timestamp Requirements](#timestamp-requirements)
+    - [Security Logs](#security-logs)
+  - [Alternate Design](#alternate-design)
+  - [Prior Art](#prior-art)
+    - [RFC5424 Syslog](#rfc5424-syslog)
+    - [Fluentd Forward Protocol Model](#fluentd-forward-protocol-model)
+  - [Appendix A. Example Mappings](#appendix-a-example-mappings)
+    - [RFC5424 Syslog](#rfc5424-syslog-1)
+    - [Windows Event Log](#windows-event-log)
+    - [SignalFx Events](#signalfx-events)
+    - [Splunk HEC](#splunk-hec)
+    - [Log4j](#log4j)
+    - [Zap](#zap)
+    - [Apache HTTP Server access log](#apache-http-server-access-log)
+    - [CloudTrail Log Event](#cloudtrail-log-event)
+    - [Google Cloud Logging](#google-cloud-logging)
+  - [Elastic Common Schema](#elastic-common-schema)
+  - [Appendix B: `SeverityNumber` example mappings](#appendix-b-severitynumber-example-mappings)
 
 ## Motivation
 
@@ -535,10 +535,8 @@ treatment of security logs in the context of the data model proposal.
 
 ## Alternate Design
 
-An
-[alternate design](https://docs.google.com/document/d/1ix9_4TQO3o-qyeyNhcOmqAc1MTyr-wnXxxsdWgCMn9c/edit?ts=5e990fe2#heading=h.cw69q2ga62p6)
-that used an envelop approach was considered but I did not find it to be overall
-better than this one.
+An alternate design that used an envelop approach was considered but I did not
+find it to be overall better than this one.
 
 ## Prior Art
 
@@ -1345,9 +1343,3 @@ for an exhaustive list.
 | Critical | Critical | | Dpanic | | ERROR2 |
 | Emergency | | | Panic | | ERROR3 |
 | Alert | | FATAL | Fatal | | FATAL |
-
-## References
-
-- [Draft discussion of Data Model](https://docs.google.com/document/d/1ix9_4TQO3o-qyeyNhcOmqAc1MTyr-wnXxxsdWgCMn9c/edit#)
-
-- [Discussion of Severity field](https://docs.google.com/document/d/1WQDz1jF0yKBXe3OibXWfy3g6lor9SvjZ4xT-8uuDCiA/edit#)
